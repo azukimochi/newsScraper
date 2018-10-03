@@ -35,24 +35,32 @@ router.get("/scrape", (req, res) => {
                     db.Article.create(result)
                         .then(dbArticle => {
                             // View the added result in the console
-                            scrapedData.push(result);
-                            console.log(`These are the scraped results: ${JSON.stringify(result)}`);
+                            // scrapedData.push(result);
                         })
                         .catch(err => // If an error occurred, send it to the clientfa
-                            res.json(err));
+                            res.json(err));        
+                        } else {
+                            console.log("Duplicate");
+                        }
+                    })
                     
-                } else {
-                    console.log("Duplicate");
-                }
-            })
-            
-        });
+                });
+                
+                db.Article.find({saved: false})
+                .then(function(allArticles) {
+                    scrapedData = allArticles;
+                console.log(`These are the scraped results: ${JSON.stringify(allArticles)}`);
+    });
         res.json();
     });
 });
 
 router.get("/scraped-results", (req, res) => {
     res.render("index", {scrapedItems: scrapedData});
+});
+
+router.get("/clear", (req, res) => {
+    scrapedData
 })
 export default router;
 
