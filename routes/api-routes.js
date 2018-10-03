@@ -50,8 +50,17 @@ router.get("/scrape", (req, res) => {
                 .then(function(allArticles) {
                     scrapedData = allArticles;
                 console.log(`These are the scraped results: ${JSON.stringify(allArticles)}`);
+                res.status(200).end();
     });
-        res.json();
+    });
+});
+
+
+router.get("/updated-scraped-results", (req, res) => {
+    db.Article.find({saved: false})
+    .then(function(refreshedArticles) {
+        scrapedData = refreshedArticles;
+        res.render("index", {scrapedItems: scrapedData});
     });
 });
 
@@ -59,8 +68,18 @@ router.get("/scraped-results", (req, res) => {
     res.render("index", {scrapedItems: scrapedData});
 });
 
-router.get("/clear", (req, res) => {
-    scrapedData
-})
+router.put("/save-article", function(req, res) {
+    db.Article.updateOne({_id: req.body.id}, {$set: {saved: true}})
+    .then(function(result) {
+        console.log(`Saved article ${req.body.id}`);
+        res.status(200).end();
+    }).catch(function(err) {
+        res.json(err);
+    });
+});
+
+// router.get("/clear", (req, res) => {
+//     scrapedData
+// })
 export default router;
 

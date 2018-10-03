@@ -39,9 +39,9 @@
                 </tr>
                 {{#each scrapedItems}}
                 <tr>
-                    <td><a href="https://www.thestar.com{{this.link}}">{{this.title}}</a></td>
+                    <td><a href="https://www.thestar.com{{this.link}}">{{this.title}}{{this._id}}</a></td>
                     <td>
-                        <button id="saveArticleBtn" class="saveBtns" value="{{this.id}}" type="submit">Save</button>
+                        <button value="{{this._id}}" class="saveBtns">Save</button>
                     </td>
                 </tr>
                 {{/each}}
