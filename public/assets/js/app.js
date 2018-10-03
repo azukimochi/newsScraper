@@ -5,7 +5,7 @@ $(document).ready(() => {
             method: "GET",
             url: "/scrape"
         }).then(function (data) {
-            setTimeout(location.replace("/scraped-results"), 1500);
+            setTimeout(location.replace("/scraped-results"), 2000);
         });
     }
 

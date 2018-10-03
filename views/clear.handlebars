@@ -31,21 +31,7 @@
                 </div>
             </div>
 
-            <table class="tables" id="scrapedTable" style="width:100%">
-                <h7>Toronto Star Headlines</h7>
-                <tr>
-                    <th>Article Title</th>
-                    <th>Save?</th>
-                </tr>
-                {{#each scrapedItems}}
-                <tr>
-                    <td><a href="https://www.thestar.com{{this.link}}">{{this.title}}{{this._id}}</a></td>
-                    <td>
-                        <button value="{{this._id}}" class="saveBtns">Save</button>
-                    </td>
-                </tr>
-                {{/each}}
-            </table>
+        
 
 
         </div>

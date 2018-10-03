@@ -12,7 +12,7 @@ import mongoose from "mongoose";
 
 import db from "./models";
 
-const PORT = 4000;
+const PORT = 5000;
 
 // Initialize Express
 let app = express();

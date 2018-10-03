@@ -10,22 +10,28 @@ let savedData = [];
 router.get("/scrape", (req, res) => {
     console.log("Hi, GET is completed!");
     // First, we grab the body of the html with request
-    request("https://www.thestar.com/news.html/", function (error, response, html) {
+    request("https://www.nytimes.com/section/todayspaper", function (error, response, html) {
         // Then, we load that into cheerio and save it to $ for a shorthand selector
         const $ = cheerio.load(html);
 
         // Now, we grab every h2 within an article tag, and do the following:
-        $("span.story__headline").each(function (i, element) {
+        $(".story-body").each(function (i, element) {
             // Save an empty result object
             const result = {};
 
             // Add the text and href of every link, and save them as properties of the result object
             result.title = $(this)
+                .children("h2")
+                .children("a")
                 .text();
             result.link = $(this)
-                .parent()
+                .children("h2")
+                .children("a")
                 .attr("href");
-
+            result.summary = $(this)
+                .children("p.summary")
+                .text();
+                // console.log(result);
             // Create a new Article using the `result` object built from scraping
             avoidDupes(result);
         });
@@ -43,20 +49,20 @@ function avoidDupes(result) {
     db.Article.findOne({ title: result.title })
         .then(dbValidation => {
             if (!dbValidation) {
-                addArticle(result);
+                addArticle(dbValidation);
             } else {
                 console.log("Duplicate");
             };
         });
 }
 
-function addArticle(result) {
+function addArticle(dbValidation) {
     console.log("New");
-    db.Article.create(result)
+    db.Article.create(dbValidation)
         .then(dbArticle => {
         })
-        .catch(err => // If an error occurred, send it to the clientfa
-            res.json(err));
+        // .catch(err => // If an error occurred, send it to the clientfa
+        //     res.json(err));
 };
 
 
@@ -97,7 +103,7 @@ router.put("/save-article", (req, res) => {
 
 router.get("/clear", (req, res) => {
     scrapedData = [];
-    res.render("clear", { scrapedItems: scrapedData });
+    res.render("clear");
 });
 
 router.delete("/delete-article", (req, res) => {

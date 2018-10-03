@@ -3,14 +3,12 @@ import router from "./api-routes.js";
 
 
 router.get("/", (req, res) => {
-    res.render("index");
+    res.render("clear");
 });
 
 router.get("*", (req, res) => {
-    res.render("index");
+    res.render("clear");
 });
-
-// router.use("/api-routes", apiRouter);
 
 export default router;
     

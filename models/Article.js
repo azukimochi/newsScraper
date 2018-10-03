@@ -17,6 +17,10 @@ var ArticleSchema = new Schema({
     required: true
   },
 
+  summary: {
+    type: String,
+    required: false
+  },
   //boolean to say if the article has been saved
   saved: {
     type: Boolean,

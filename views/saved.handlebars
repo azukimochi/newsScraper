@@ -35,12 +35,14 @@
                 <h7>Toronto Star Headlines</h7>
                 <tr>
                     <th>Article Title</th>
+                    <th>Summary</th>
                     <th>Notes</th>
                     <th>Delete?</th>
                 </tr>
                 {{#each savedItems}}
                 <tr>
-                    <td><a href="https://www.thestar.com{{this.link}}">{{this.title}}{{this._id}}</a></td>
+                    <td><a href="{{this.link}}">{{this.title}}{{this._id}}</a></td>
+                    <td><p>{{this.summary}}</p></td>
                     <td>
                         <button value="{{this._id}}" data-toggle="modal" data-target="#noteModal" class="noteBtns">Notes</button>
                     </td>
