@@ -1,0 +1,89 @@
+<div class="fluid-container">
+    <div class="row">
+        <div class="col-xl-12">
+
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="navbar-brand" href="/">News Scraper</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/saved">Saved Articles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-primary" id="scrapeBtn" href="#">Scrape New Articles</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-primary" href="/clear">Clear the Articles</a>
+                </li>
+            </ul>
+
+            <div class="row">
+                <div class="col-xl-11">
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-4">Fluid jumbotron</h1>
+                            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <table class="tables" id="scrapedTable" style="width:100%">
+                <h7>Toronto Star Headlines</h7>
+                <tr>
+                    <th>Article Title</th>
+                    <th>Summary</th>
+                    <th>Notes</th>
+                    <th>Delete?</th>
+                </tr>
+                {{#each savedItems}}
+                <tr>
+                    <td>
+                        <a href="{{this.link}}">{{this.title}}{{this._id}}</a>
+                    </td>
+                    <td>
+                        <p>{{this.summary}}</p>
+                    </td>
+                    <td>
+                        <button value="{{this._id}}" data-toggle="modal" data-target="#noteModal" class="noteBtns">Notes</button>
+                    </td>
+                    <td>
+                        <button value="{{this._id}}" class="delBtns">Delete</button>
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+            <!-- Modal -->
+            <div id="noteModal" class="modal fade" role="dialog" style="display: none;">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title">
+                                <strong>Notes</strong>
+                            </h2>
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="noteInstructions">Enter a new note or click on an existing one to edit it.</div>
+                            <div class="existingNotesContainer">
+                            </div>
+                            <div id="saveMsg">Your note has been saved!</div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-target="#noteModal" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>

@@ -1,12 +1,15 @@
-var express = require("express");
+import express from "express";
+import router from "./api-routes.js";
 
-module.exports = function(app) {
-    app.get("/", function(req, res) {
-        res.render("index");
-    });
+// Route for going to the home page
+router.get("/", (req, res) => {
+    res.render("clear");
+});
 
-    app.get("*", function(req, res) {
-        res.render("index");
-    });
+// Catch all route that redirects to the home page 
+router.get("*", (req, res) => {
+    res.render("clear");
+});
+
+export default router;
     
-};
