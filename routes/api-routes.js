@@ -27,18 +27,27 @@ router.get("/scrape", (req, res) => {
                 .attr("href");
 
             // Create a new Article using the `result` object built from scraping
-            db.Article.create(result)
-                .then(dbArticle => {
-                    // View the added result in the console
-                    scrapedData.push(result);
-                    console.log(`These are the scraped results: ${JSON.stringify(result)}`);
-                })
-                .catch(err => // If an error occurred, send it to the clientfa
-                    res.json(err));
+            
+            db.Article.findOne({title: result.title})
+            .then(dbValidation => {
+                if (!dbValidation) {
+                    console.log("New");
+                    db.Article.create(result)
+                        .then(dbArticle => {
+                            // View the added result in the console
+                            scrapedData.push(result);
+                            console.log(`These are the scraped results: ${JSON.stringify(result)}`);
+                        })
+                        .catch(err => // If an error occurred, send it to the clientfa
+                            res.json(err));
+                    
+                } else {
+                    console.log("Duplicate");
+                }
+            })
+            
         });
         res.json();
-        // If we were able to successfully scrape and save an Article, send a message to the client
-        // res.send("Scrape Complete")
     });
 });
 

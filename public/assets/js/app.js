@@ -3,7 +3,7 @@ $(document).ready(() => {
     $("#scrapeBtn").on("click", event => {
         event.preventDefault();
         scrapeNews();
-        setTimeout(goToScrapedResults, 1000);
+        setTimeout(goToScrapedResults, 1500);
         console.log(`Hi, the scrape button is working!`);
     });
 
