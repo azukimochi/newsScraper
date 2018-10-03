@@ -35,13 +35,17 @@
                 <h7>Toronto Star Headlines</h7>
                 <tr>
                     <th>Article Title</th>
-                    <th>Save?</th>
+                    <th>Notes</th>
+                    <th>Delete?</th>
                 </tr>
-                {{#each scrapedItems}}
+                {{#each savedItems}}
                 <tr>
                     <td><a href="https://www.thestar.com{{this.link}}">{{this.title}}{{this._id}}</a></td>
                     <td>
-                        <button value="{{this._id}}" class="saveBtns">Save</button>
+                        <button value="{{this._id}}" class="noteBtns">Notes</button>
+                    </td>
+                    <td>
+                        <button value="{{this._id}}" class="delBtns">Delete</button>
                     </td>
                 </tr>
                 {{/each}}
