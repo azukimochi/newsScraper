@@ -4,10 +4,11 @@ import db from "../models";
 import request from "request";
 // import router from "./html-routes.js";
 let router = express.Router();
+let scrapedData = [];
 
 
 router.get("/scrape", (req, res) => {
-    console.log("Hi");
+    console.log("Hi, GET is completed!");
     // First, we grab the body of the html with request
     request("https://www.thestar.com/news.html/", function(error, response, html) {
         // Then, we load that into cheerio and save it to $ for a shorthand selector
@@ -29,16 +30,20 @@ router.get("/scrape", (req, res) => {
             db.Article.create(result)
                 .then(dbArticle => {
                     // View the added result in the console
-                    console.log(dbArticle);
+                    scrapedData.push(result);
+                    console.log(`These are the scraped results: ${JSON.stringify(result)}`);
                 })
                 .catch(err => // If an error occurred, send it to the clientfa
                     res.json(err));
         });
-
+        res.json();
         // If we were able to successfully scrape and save an Article, send a message to the client
-        res.send("Scrape Complete");
+        // res.send("Scrape Complete")
     });
 });
 
+router.get("/scraped-results", (req, res) => {
+    res.render("index", {scrapedItems: scrapedData});
+})
 export default router;
 

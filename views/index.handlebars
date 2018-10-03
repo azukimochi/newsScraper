@@ -13,7 +13,7 @@
                     <a class="nav-link" href="#">Saved Articles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-primary" href="#">Scrape New Articles</a>
+                    <a class="btn btn-primary" id="scrapeBtn" href="#">Scrape New Articles</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-primary" href="#">Clear the Articles</a>
@@ -31,9 +31,23 @@
                 </div>
             </div>
 
-            <ul>
-                {{#each headlines}} {{this.title}} {{this.link}} {{/each}}
-            </ul>
+            <table class="tables" id="scrapedTable" style="width:100%">
+                <h7>Toronto Star Headlines</h7>
+                <tr>
+                    <th>Article Title</th>
+                    <th>Save?</th>
+                </tr>
+                {{#each scrapedItems}}
+                <tr>
+                    <td><a href="https://www.thestar.com{{this.link}}">{{this.title}}</a></td>
+                    <td>
+                        <button id="saveArticleBtn" class="saveBtns" value="{{this.id}}" type="submit">Save</button>
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+
+
         </div>
     </div>
 
