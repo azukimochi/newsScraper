@@ -1,12 +1,16 @@
-var express = require("express");
+import express from "express";
+import router from "./api-routes.js";
 
-module.exports = function(app) {
-    app.get("/", function(req, res) {
-        res.render("index");
-    });
 
-    app.get("*", function(req, res) {
-        res.render("index");
-    });
+router.get("/", (req, res) => {
+    res.render("index");
+});
+
+router.get("*", (req, res) => {
+    res.render("index");
+});
+
+// router.use("/api-routes", apiRouter);
+
+export default router;
     
-};
