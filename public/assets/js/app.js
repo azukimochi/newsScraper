@@ -1,5 +1,6 @@
 $(document).ready(() => {
-    
+
+    // function to do a GET api call for scraping the news 
     function scrapeNews() {
         $.ajax({
             method: "GET",
@@ -9,107 +10,96 @@ $(document).ready(() => {
         });
     }
 
+    // function to do a PUT api call for saving an article 
     function saveArticle(idObj) {
         $.ajax("/save-article", {
             type: "PUT",
             data: idObj
-        }).then(function(data) {
+        }).then(function (data) {
             setTimeout(location.replace("/updated-scraped-results"), 1500);
         });
     };
 
+    // function to do a DELETE api call for deleting an article from the Saved web page 
     function deleteArticle(idObj) {
         $.ajax("/delete-article", {
             type: "DELETE",
             data: idObj
-        }).then(function(data) {
+        }).then(function (data) {
             setTimeout(location.reload(), 1500);
         });
     };
 
+    // Clicking the scrape button in the Nav triggers the api call to scrape news 
     $("#scrapeBtn").on("click", event => {
         event.preventDefault();
         scrapeNews();
-        // setTimeout(goToScrapedResults, 1500);
-        console.log(`Hi, the scrape button is working!`);
     });
 
-    console.log(`ocument is ready!`);
-
-    $(".saveBtns").on("click", function(event) {
+    // Clicking the save button next to the scraped article triggers the api call to save the article 
+    $(".saveBtns").on("click", function (event) {
         event.preventDefault();
-        console.log(`Hi the save button is being clicked`);
-        console.log(`This is the ID stored in the button: ${$(this).val()}`);
+        // console.log(`This is the ID stored in the button: ${$(this).val()}`);
         var idObj = {
             id: $(this).val()
         }
         saveArticle(idObj);
     });
 
-    $(".delBtns").on("click", function(event) {
+    // Clicking the delete button next to the saved article deletes it from the saved web page and from the database 
+    $(".delBtns").on("click", function (event) {
         event.preventDefault();
-        console.log(`Hi the delete button is being clicked`);
-        console.log(`This is the ID stored in the button: ${$(this).val()}`);
+        // console.log(`This is the ID stored in the button: ${$(this).val()}`);
         var idObj = {
             id: $(this).val()
         }
         deleteArticle(idObj);
     });
 
-    $(".noteBtns").on("click", function(event) {
+    // Clicking on the notes button next to the saved article opens a modal to allow the user to type in a note 
+    $(".noteBtns").on("click", function (event) {
         event.preventDefault();
         $(".existingNotesContainer").empty();
         $("#saveMsg").hide();
-        console.log("the note button is working");
         let articleID = $(this).val();
         $("#noteModal").attr("data-id", articleID);
-        console.log("the associated ID is: " + $("#noteModal").attr("data-id"));
+        // console.log("the associated ID is: " + $("#noteModal").attr("data-id"));
 
         $.ajax({
             method: "GET",
             url: "/articles/" + articleID
-          }).then(function(data) {
-              console.log(data);
-              $(".existingNotesContainer").append("<div id='existingNoteInput' name='body' contenteditable='true'></div>");
-              $(".existingNotesContainer").append("<button data-id='"+ data._id + "' class='saveNoteBtns'>Save</button>");
-              
-              if (data.note) {
-                  $("#existingNoteInput").append(data.note.body);
-                }
-                // $("#noteModal").modal("toggle");
-            })
+        }).then(function (data) {
+            //   console.log(data);
+            $(".existingNotesContainer").append("<div id='existingNoteInput' name='body' contenteditable='true'></div>");
+            $(".existingNotesContainer").append("<button data-id='" + data._id + "' class='saveNoteBtns'>Save</button>");
+
+            if (data.note) {
+                $("#existingNoteInput").append(data.note.body);
+            }
+        })
 
 
     });
 
+    // Clicking on the save button in the notes modal allows the user to save the  note associated to the article 
     $(document).on("click", ".saveNoteBtns", function (event) {
         event.preventDefault();
-        console.log("Hi, the save button is working!");
         let articleID = $(this).attr("data-id");
-        console.log(articleID);
-        console.log("input: " + $("#existingNoteInput").text());
-        // Run a POST request to change the note, using what's entered in the inputs
+        // console.log(articleID);
+        // console.log("input: " + $("#existingNoteInput").text());
         $.ajax({
             method: "POST",
             url: "/articles/" + articleID,
             data: {
                 id: articleID,
-                // Value taken from note textarea
                 body: $("#existingNoteInput").text()
             }
         })
-            // With that done
             .then(function (data) {
-                // Log the response
-                console.log(data);
-                // Empty the notes section
+                // console.log(data);
                 $("#saveMsg").show();
-                // $(".existingNotesContainer").empty();
             });
 
-        // Also, remove the values entered in the input and textarea for note entry
-        // $("#titleinput").val("");
-        // $("#bodyinput").val("");
     });
 
 });
