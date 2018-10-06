@@ -29,44 +29,46 @@ router.get("/scrape", function(req, res) {
 
             avoidDupes(result, req, res);
         });
-
+        findArticles(req, res);
     });
 });
 
 // Querying all the unsaved scraped articles to appear on the page 
-function findArticles(dbArticle, req, res) {
+function findArticles(req, res) {
     db.Article.find({ saved: false })
         .then(function (allArticles) {
             scrapedData = allArticles;
-            // console.log(`These are the scraped results: ${JSON.stringify(allArticles)}`);
+            console.log(`These are the scraped results: ${JSON.stringify(allArticles)}`);
             res.status(200).end();
         })
         .catch(function(err) {
-            return res.json(err);
+            res.json(err);
         });
 }
 
 // Checking the database to see if a document with the same title exists 
 function avoidDupes(result, req, res) {
+    var result=result;
     db.Article.findOne({ title: result.title })
         .then(function(dbValidation) {
-            if (!dbValidation) {
-                addArticle(dbValidation, req, res);
+            // console.log("This is dbValidation: " + dbValidation);
+            if (dbValidation == null) {
+                addArticle(result, req, res);
             } else {
-                // console.log("Duplicate");
+                console.log("Duplicate");
             };
         });
 }
 
 // Adding a new article that's been scraped into the database 
-function addArticle(dbValidation, req, res) {
-    // console.log("New");
-    db.Article.create(dbValidation)
+function addArticle(result, req, res) {
+    console.log("New");
+    db.Article.create(result)
         .then(function(dbArticle) {
-            findArticles(dbArticle, req, res);
+            console.log("created!");
         })
         .catch(function(err) {
-            res.json(err);
+            console.log(err);
         });
 };
 

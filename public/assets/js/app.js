@@ -20,10 +20,10 @@ $(document).ready(function() {
         });
     };
 
-    // function to do a DEvarE api call for devaring an article from the Saved web page 
-    function devareArticle(idObj) {
-        $.ajax("/devare-article", {
-            type: "DEvarE",
+    // function to do a DELETE api call for deleting an article from the Saved web page 
+    function deleteArticle(idObj) {
+        $.ajax("/delete-article", {
+            type: "DELETE",
             data: idObj
         }).then(function (data) {
             setTimeout(location.reload(), 1500);
@@ -46,14 +46,14 @@ $(document).ready(function() {
         saveArticle(idObj);
     });
 
-    // Clicking the devare button next to the saved article devares it from the saved web page and from the database 
+    // Clicking the delete button next to the saved article deletes it from the saved web page and from the database 
     $(".delBtns").on("click", function (event) {
         event.preventDefault();
         // console.log(`This is the ID stored in the button: ${$(this).val()}`);
         var idObj = {
             id: $(this).val()
         }
-        devareArticle(idObj);
+        deleteArticle(idObj);
     });
 
     // Clicking on the notes button next to the saved article opens a modal to allow the user to type in a note 
