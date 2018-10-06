@@ -1,4 +1,4 @@
-$(document).ready(() => {
+$(document).ready(function() {
 
     // function to do a GET api call for scraping the news 
     function scrapeNews() {
@@ -20,10 +20,10 @@ $(document).ready(() => {
         });
     };
 
-    // function to do a DELETE api call for deleting an article from the Saved web page 
-    function deleteArticle(idObj) {
-        $.ajax("/delete-article", {
-            type: "DELETE",
+    // function to do a DEvarE api call for devaring an article from the Saved web page 
+    function devareArticle(idObj) {
+        $.ajax("/devare-article", {
+            type: "DEvarE",
             data: idObj
         }).then(function (data) {
             setTimeout(location.reload(), 1500);
@@ -31,7 +31,7 @@ $(document).ready(() => {
     };
 
     // Clicking the scrape button in the Nav triggers the api call to scrape news 
-    $("#scrapeBtn").on("click", event => {
+    $("#scrapeBtn").on("click", function(event) {
         event.preventDefault();
         scrapeNews();
     });
@@ -46,14 +46,14 @@ $(document).ready(() => {
         saveArticle(idObj);
     });
 
-    // Clicking the delete button next to the saved article deletes it from the saved web page and from the database 
+    // Clicking the devare button next to the saved article devares it from the saved web page and from the database 
     $(".delBtns").on("click", function (event) {
         event.preventDefault();
         // console.log(`This is the ID stored in the button: ${$(this).val()}`);
         var idObj = {
             id: $(this).val()
         }
-        deleteArticle(idObj);
+        devareArticle(idObj);
     });
 
     // Clicking on the notes button next to the saved article opens a modal to allow the user to type in a note 
@@ -61,7 +61,7 @@ $(document).ready(() => {
         event.preventDefault();
         $(".existingNotesContainer").empty();
         $("#saveMsg").hide();
-        let articleID = $(this).val();
+        var articleID = $(this).val();
         $("#noteModal").attr("data-id", articleID);
         // console.log("the associated ID is: " + $("#noteModal").attr("data-id"));
 
@@ -84,7 +84,7 @@ $(document).ready(() => {
     // Clicking on the save button in the notes modal allows the user to save the  note associated to the article 
     $(document).on("click", ".saveNoteBtns", function (event) {
         event.preventDefault();
-        let articleID = $(this).attr("data-id");
+        var articleID = $(this).attr("data-id");
         // console.log(articleID);
         // console.log("input: " + $("#existingNoteInput").text());
         $.ajax({
