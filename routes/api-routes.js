@@ -1,19 +1,19 @@
-import express from "express";
-import cheerio from "cheerio";
-import db from "../models";
-import request from "request";
+var express = require("express");
+var cheerio = require("cheerio");
+var db = require("../models");
+var request = require("request");
 
-let router = express.Router();
-let scrapedData = [];
-let savedData = [];
+var router = express.Router();
+var scrapedData = [];
+var savedData = [];
 
 // Route for scraping the NY Times today's newspaper category 
-router.get("/scrape", (req, res) => {
-    request("https://www.nytimes.com/section/todayspaper", function (error, response, html) {
-        const $ = cheerio.load(html);
-        $(".story-body").each(function (i, element) {
+router.get("/scrape", function(req, res) {
+    request("https://www.nytimes.com/section/todayspaper", function(error, response, html) {
+        var $ = cheerio.load(html);
+        $(".story-body").each(function(i, element) {
 
-            const result = {};
+            var result = {};
 
             result.title = $(this)
                 .children("h2")
@@ -29,56 +29,62 @@ router.get("/scrape", (req, res) => {
 
             avoidDupes(result, req, res);
         });
-
+        findArticles(req, res);
     });
 });
 
 // Querying all the unsaved scraped articles to appear on the page 
-function findArticles(dbArticle, req, res) {
+function findArticles(req, res) {
     db.Article.find({ saved: false })
         .then(function (allArticles) {
             scrapedData = allArticles;
-            // console.log(`These are the scraped results: ${JSON.stringify(allArticles)}`);
+            console.log(`These are the scraped results: ${JSON.stringify(allArticles)}`);
             res.status(200).end();
         })
-        .catch(err => res.json(err));
+        .catch(function(err) {
+            res.json(err);
+        });
 }
 
 // Checking the database to see if a document with the same title exists 
 function avoidDupes(result, req, res) {
+    var result=result;
     db.Article.findOne({ title: result.title })
-        .then(dbValidation => {
-            if (!dbValidation) {
-                addArticle(dbValidation, req, res);
+        .then(function(dbValidation) {
+            // console.log("This is dbValidation: " + dbValidation);
+            if (dbValidation == null) {
+                addArticle(result, req, res);
             } else {
-                // console.log("Duplicate");
+                console.log("Duplicate");
             };
         });
 }
 
 // Adding a new article that's been scraped into the database 
-function addArticle(dbValidation, req, res) {
-    // console.log("New");
-    db.Article.create(dbValidation)
-        .then(dbArticle => {
-            findArticles(dbArticle, req, res);
+function addArticle(result, req, res) {
+    console.log("New");
+    db.Article.create(result)
+        .then(function(dbArticle) {
+            console.log("created!");
         })
-        .catch(err => res.json(err));
+        .catch(function(err) {
+            console.log(err);
+        });
 };
 
 // Route for showing all your saved articles on the saved web page
-router.get("/saved", (req, res) => {
+router.get("/saved", function(req, res) {
     db.Article.find({ saved: true })
         .then(function (savedArticles) {
             savedData = savedArticles;
             res.render("saved", { savedItems: savedData });
         }).catch(function (err) {
             res.json(err);
-        })
+        });
 });
 
 // Route for updating the scraped results after saving an article 
-router.get("/updated-scraped-results", (req, res) => {
+router.get("/updated-scraped-results", function(req, res) {
     db.Article.find({ saved: false })
         .then(function (refreshedArticles) {
             scrapedData = refreshedArticles;
@@ -89,12 +95,12 @@ router.get("/updated-scraped-results", (req, res) => {
 });
 
 // Route for rendering the scraped results 
-router.get("/scraped-results", (req, res) => {
+router.get("/scraped-results", function(req, res) {
     res.render("index", { scrapedItems: scrapedData });
 });
 
 // Route for saving an article 
-router.put("/save-article", (req, res) => {
+router.put("/save-article", function(req, res) {
     db.Article.updateOne({ _id: req.body.id }, { $set: { saved: true } })
         .then(function (result) {
             // console.log(`Saved article ${req.body.id}`);
@@ -105,13 +111,13 @@ router.put("/save-article", (req, res) => {
 });
 
 // Route for clearing the scraped results.
-router.get("/clear", (req, res) => {
+router.get("/clear", function(req, res) {
     scrapedData = [];
     res.render("clear");
 });
 
-// Route for deleting an article from the Saved web page
-router.delete("/delete-article", (req, res) => {
+// Route for deleting an article = require( the Saved web page
+router.delete("/delete-article", function(req, res) {
     // console.log("Id: " + req.body.id);
     db.Article.deleteOne({ _id: req.body.id })
         .then(function (result) {
@@ -148,5 +154,5 @@ router.post("/articles/:id", function (req, res) {
         });
 });
 
-export default router;
+module.exports = router;
 

@@ -1,4 +1,4 @@
-$(document).ready(() => {
+$(document).ready(function() {
 
     // function to do a GET api call for scraping the news 
     function scrapeNews() {
@@ -31,7 +31,7 @@ $(document).ready(() => {
     };
 
     // Clicking the scrape button in the Nav triggers the api call to scrape news 
-    $("#scrapeBtn").on("click", event => {
+    $("#scrapeBtn").on("click", function(event) {
         event.preventDefault();
         scrapeNews();
     });
@@ -61,7 +61,7 @@ $(document).ready(() => {
         event.preventDefault();
         $(".existingNotesContainer").empty();
         $("#saveMsg").hide();
-        let articleID = $(this).val();
+        var articleID = $(this).val();
         $("#noteModal").attr("data-id", articleID);
         // console.log("the associated ID is: " + $("#noteModal").attr("data-id"));
 
@@ -84,7 +84,7 @@ $(document).ready(() => {
     // Clicking on the save button in the notes modal allows the user to save the  note associated to the article 
     $(document).on("click", ".saveNoteBtns", function (event) {
         event.preventDefault();
-        let articleID = $(this).attr("data-id");
+        var articleID = $(this).attr("data-id");
         // console.log(articleID);
         // console.log("input: " + $("#existingNoteInput").text());
         $.ajax({
