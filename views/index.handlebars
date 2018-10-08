@@ -21,8 +21,8 @@
             </ul>
 
             <div class="row">
-                <div class="col-xl-11">
-                    <div class="jumbotron jumbotron-fluid">
+                <div class="col-xl-12">
+                    <div class="background-container">
                         <div class="container">
                             <h1 class="display-4">Fluid jumbotron</h1>
                             <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
@@ -31,6 +31,9 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="table-container">
             <table class="tables" id="scrapedTable" style="width:100%">
                 <h7>Toronto Star Headlines</h7>
                 <tr>
@@ -43,11 +46,15 @@
                     <td><a href="{{this.link}}">{{this.title}}</a></td>
                     <td><p>{{this.summary}}</p></td>
                     <td>
-                        <button value="{{this._id}}" class="saveBtns">Save</button>
+                        <button value="{{this._id}}" id="saveBtns" class="btn btn-primary">Save</button>
                     </td>
                 </tr>
                 {{/each}}
             </table>
+
+                    </div>
+                </div>
+            </div>
 
 
         </div>

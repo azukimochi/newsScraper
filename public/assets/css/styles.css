@@ -2,6 +2,8 @@
 display:inline-flex;
 background: pink;
 width: 100%;
+position: fixed;
+z-index: 2;
 }
 .container {
     padding: 0;
@@ -30,7 +32,65 @@ width: 100%;
     transform: translateY(4px);
   }
 
-.jumbotron.jumbotron-fluid {
+.background-container{
+    height: 400px;
+}
+
+.tables {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+h7 {
+    text-align:center;
+}
+tr:nth-child(even) {
+    /* background-color: #dddddd; */
+    background-color: rgb(143,153,196, 0.8);
+}
+
+tr:nth-child(odd) {
+    /* background-color: #dddddd; */
+    background-color: rgb(255,255,255, 0.8);
+}
+
+body {
+    height: 100%;
     background-image: url("../img/purple-globe.jpg");
-    /* background-color: red; */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+}
+
+a {
+    color: black;
+}
+.table-container {
+    font-weight:bold;
+    max-width: 90%;
+    margin: auto;
+    margin-bottom:20px;
+}
+
+#saveBtns{
+    background-color:rgb(141,85,143);
+} 
+
+#noteBtns, #saveNoteBtns {
+    background-color: rgb(68,34,204);
+
 }

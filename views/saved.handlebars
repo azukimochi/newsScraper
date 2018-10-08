@@ -21,8 +21,8 @@
             </ul>
 
             <div class="row">
-                <div class="col-xl-11">
-                    <div class="jumbotron jumbotron-fluid">
+                <div class="col-xl-12">
+                    <div class="background-container">
                         <div class="container">
                             <h1 class="display-4">Fluid jumbotron</h1>
                             <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
@@ -31,6 +31,9 @@
                 </div>
             </div>
 
+      <div class="row">
+                <div class="col-xl-12">
+                    <div class="table-container">
             <table class="tables" id="scrapedTable" style="width:100%">
                 <h7>Toronto Star Headlines</h7>
                 <tr>
@@ -48,14 +51,18 @@
                         <p>{{this.summary}}</p>
                     </td>
                     <td>
-                        <button value="{{this._id}}" data-toggle="modal" data-target="#noteModal" class="noteBtns">Notes</button>
+                        <button value="{{this._id}}" data-toggle="modal" data-target="#noteModal" id="noteBtns" class="btn btn-primary">Notes</button>
                     </td>
                     <td>
-                        <button value="{{this._id}}" class="delBtns">Delete</button>
+                        <button value="{{this._id}}" id="delBtns" class="btn btn-primary">Delete</button>
                     </td>
                 </tr>
                 {{/each}}
             </table>
+                        
+                    </div>
+                </div>
+            </div>
             <!-- Modal -->
             <div id="noteModal" class="modal fade" role="dialog" style="display: none;">
                 <div class="modal-dialog">
@@ -76,7 +83,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-target="#noteModal" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-target="#noteModal" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>

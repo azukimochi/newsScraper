@@ -37,7 +37,7 @@ $(document).ready(function() {
     });
 
     // Clicking the save button next to the scraped article triggers the api call to save the article 
-    $(".saveBtns").on("click", function (event) {
+    $("#saveBtns").on("click", function (event) {
         event.preventDefault();
         // console.log(`This is the ID stored in the button: ${$(this).val()}`);
         var idObj = {
@@ -47,7 +47,7 @@ $(document).ready(function() {
     });
 
     // Clicking the delete button next to the saved article deletes it from the saved web page and from the database 
-    $(".delBtns").on("click", function (event) {
+    $("#delBtns").on("click", function (event) {
         event.preventDefault();
         // console.log(`This is the ID stored in the button: ${$(this).val()}`);
         var idObj = {
@@ -57,7 +57,7 @@ $(document).ready(function() {
     });
 
     // Clicking on the notes button next to the saved article opens a modal to allow the user to type in a note 
-    $(".noteBtns").on("click", function (event) {
+    $("#noteBtns").on("click", function (event) {
         event.preventDefault();
         $(".existingNotesContainer").empty();
         $("#saveMsg").hide();
@@ -71,7 +71,7 @@ $(document).ready(function() {
         }).then(function (data) {
             //   console.log(data);
             $(".existingNotesContainer").append("<div id='existingNoteInput' name='body' contenteditable='true'></div>");
-            $(".existingNotesContainer").append("<button data-id='" + data._id + "' class='saveNoteBtns'>Save</button>");
+            $(".existingNotesContainer").append("<button data-id='" + data._id + "' class='btn btn-primary' id='saveNoteBtns'>Save</button>");
 
             if (data.note) {
                 $("#existingNoteInput").append(data.note.body);
@@ -82,7 +82,7 @@ $(document).ready(function() {
     });
 
     // Clicking on the save button in the notes modal allows the user to save the  note associated to the article 
-    $(document).on("click", ".saveNoteBtns", function (event) {
+    $(document).on("click", "#saveNoteBtns", function (event) {
         event.preventDefault();
         var articleID = $(this).attr("data-id");
         // console.log(articleID);
