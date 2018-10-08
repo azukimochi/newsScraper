@@ -1,13 +1,30 @@
-.nav.justify-content-end {
-display:inline-flex;
-background: pink;
+.nav.justify-content-left {
+background: rgb(224,180,224, 0.9);
 width: 100%;
 position: fixed;
 z-index: 2;
 }
+
+.nav-container {
+    display: inline-flex;
+    margin-left: 20px;
+}
 .container {
     padding: 0;
+    margin-top:150px;
 }
+
+#home-link, #saved-link{
+    margin-top: 11px;
+    color: white;
+}
+
+
+.navbar-brand {
+    margin-top: 10px;
+    color: white;
+}
+
 
 .btn.btn-primary {
     background-color: #f4511e;
@@ -17,7 +34,7 @@ z-index: 2;
     text-align: center;
     font-size: 16px;
     margin: 4px 2px;
-    opacity: 0.6;
+    opacity: 0.7;
     transition: 0.3s;
     display: inline-block;
     text-decoration: none;
@@ -33,7 +50,7 @@ z-index: 2;
   }
 
 .background-container{
-    height: 400px;
+    height: 200px;
 }
 
 .tables {
@@ -86,11 +103,33 @@ a {
     margin-bottom:20px;
 }
 
-#saveBtns{
+#saveBtns, #scrapeBtn {
     background-color:rgb(141,85,143);
 } 
 
-#noteBtns, #saveNoteBtns {
+.noteBtns.btn.btn-primary, .saveNoteBtns.btn.btn-primary, .clearBtn.btn.btn-primary {
     background-color: rgb(68,34,204);
+}
 
+p.lines {
+    margin-top: 10px;
+    background-color: rgb(255, 255, 255, 0.65);
+    font-size: 30px;
+    padding: 10px;
+}
+
+#line1 {
+    width: 40%;
+}
+
+#line2 {
+    width: 60%;
+}
+
+#existingNoteInput {
+    border-style: groove;
+    border-width: 1px;
+    border-color: slateblue;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
