@@ -1,3 +1,11 @@
+body {
+    height: 100%;
+    background-image: url("../img/purple-globe.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
 .nav.justify-content-left {
 background: rgb(224,180,224, 0.9);
 width: 100%;
@@ -15,13 +23,13 @@ z-index: 2;
 }
 
 #home-link, #saved-link{
-    margin-top: 11px;
+    margin-top: 15px;
     color: white;
 }
 
 
 .navbar-brand {
-    margin-top: 10px;
+    margin-top: 14px;
     color: white;
 }
 
@@ -54,7 +62,7 @@ z-index: 2;
 }
 
 .tables {
-    font-family: arial, sans-serif;
+    font-family: 'Open Sans Condensed', sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
@@ -69,29 +77,18 @@ th {
     border: 1px solid #dddddd;
     text-align: center;
     padding: 8px;
+    font-size: 18px;
 }
 
-h7 {
-    text-align:center;
-}
+
 tr:nth-child(even) {
-    /* background-color: #dddddd; */
     background-color: rgb(143,153,196, 0.8);
 }
 
 tr:nth-child(odd) {
-    /* background-color: #dddddd; */
     background-color: rgb(255,255,255, 0.8);
 }
 
-body {
-    height: 100%;
-    background-image: url("../img/purple-globe.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-
-}
 
 a {
     color: black;
@@ -101,6 +98,7 @@ a {
     max-width: 90%;
     margin: auto;
     margin-bottom:20px;
+    position: relative;
 }
 
 #saveBtns, #scrapeBtn {
