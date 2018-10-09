@@ -5,7 +5,7 @@
             <ul class="nav justify-content-left">
                <div class="nav-container">
                 <li class="nav-item">
-                    <a class="navbar-brand" href="/">News Scraper</a>
+                    <div class="navbar-brand">News Scraper</div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="home-link" href="/">Home</a>
@@ -46,7 +46,7 @@
                 {{#each savedItems}}
                 <tr>
                     <td>
-                        <a href="{{this.link}}">{{this.title}}</a>
+                        <a href="{{this.link}}" target="_blank">{{this.title}}</a>
                     </td>
                     <td>
                         <p>{{this.summary}}</p>
