@@ -62,13 +62,13 @@ function avoidDupes(result, req, res) {
 
 // Adding a new article that's been scraped into the database 
 function addArticle(result, req, res) {
-    console.log("New");
+    // console.log("New");
     db.Article.create(result)
         .then(function(dbArticle) {
             // console.log("created!");
         })
         .catch(function(err) {
-            console.log(err);
+            // console.log(err);
         });
 };
 

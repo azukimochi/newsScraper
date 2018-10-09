@@ -101,7 +101,7 @@ a {
     position: relative;
 }
 
-#saveBtns, #scrapeBtn {
+.saveBtns.btn.btn-primary, #scrapeBtn {
     background-color:rgb(141,85,143);
 } 
 
