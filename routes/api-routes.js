@@ -38,7 +38,7 @@ function findArticles(req, res) {
     db.Article.find({ saved: false })
         .then(function (allArticles) {
             scrapedData = allArticles;
-            console.log(`These are the scraped results: ${JSON.stringify(allArticles)}`);
+            // console.log(`These are the scraped results: ${JSON.stringify(allArticles)}`);
             res.status(200).end();
         })
         .catch(function(err) {
@@ -55,7 +55,7 @@ function avoidDupes(result, req, res) {
             if (dbValidation == null) {
                 addArticle(result, req, res);
             } else {
-                console.log("Duplicate");
+                // console.log("Duplicate");
             };
         });
 }
@@ -65,7 +65,7 @@ function addArticle(result, req, res) {
     console.log("New");
     db.Article.create(result)
         .then(function(dbArticle) {
-            console.log("created!");
+            // console.log("created!");
         })
         .catch(function(err) {
             console.log(err);

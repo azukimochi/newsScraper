@@ -2,37 +2,42 @@
     <div class="row">
         <div class="col-xl-12">
 
-            <ul class="nav justify-content-end">
+            <ul class="nav justify-content-left">
+                <div class="nav-container">
                 <li class="nav-item">
-                    <a class="navbar-brand" href="/">News Scraper</a>
+                    <div class="navbar-brand">News Scraper</div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/">Home</a>
+                    <a class="nav-link" id="home-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/saved">Saved Articles</a>
+                    <a class="nav-link" id="saved-link" href="/saved">Saved Articles</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-primary" id="scrapeBtn" href="#">Scrape New Articles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-primary" href="/clear">Clear the Articles</a>
+                    <a class="clearBtn btn btn-primary" href="/clear">Clear the Articles</a>
                 </li>
+                </div>
+                    
             </ul>
 
             <div class="row">
-                <div class="col-xl-11">
-                    <div class="jumbotron jumbotron-fluid">
+                <div class="col-xl-12">
+                    <div class="background-container">
                         <div class="container">
-                            <h1 class="display-4">Fluid jumbotron</h1>
-                            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                            <p class="lines" id="line1">Scrape the New York Times!</p>
+                            <p class="lines" id="line2">Save articles, add notes, and build your Saved List!</p>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="table-container">
             <table class="tables" id="scrapedTable" style="width:100%">
-                <h7>Toronto Star Headlines</h7>
                 <tr>
                     <th>Article Title</th>
                     <th>Summary</th>
@@ -40,14 +45,18 @@
                 </tr>
                 {{#each scrapedItems}}
                 <tr>
-                    <td><a href="{{this.link}}">{{this.title}}</a></td>
+                    <td><a href="{{this.link}}" target="_blank">{{this.title}}</a></td>
                     <td><p>{{this.summary}}</p></td>
                     <td>
-                        <button value="{{this._id}}" class="saveBtns">Save</button>
+                        <button value="{{this._id}}" id="saveBtns" class="btn btn-primary">Save</button>
                     </td>
                 </tr>
                 {{/each}}
             </table>
+
+                    </div>
+                </div>
+            </div>
 
 
         </div>

@@ -1,0 +1,10 @@
+@media only screen and (max-width: 780px) {
+    p.lines {
+        font-size: 20px;
+        margin-left: 18px;
+    }
+
+    #saved-link {
+        margin-top: 8px;
+    }
+}

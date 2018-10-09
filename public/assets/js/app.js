@@ -37,7 +37,7 @@ $(document).ready(function() {
     });
 
     // Clicking the save button next to the scraped article triggers the api call to save the article 
-    $(".saveBtns").on("click", function (event) {
+    $("#saveBtns").on("click", function (event) {
         event.preventDefault();
         // console.log(`This is the ID stored in the button: ${$(this).val()}`);
         var idObj = {
@@ -71,7 +71,7 @@ $(document).ready(function() {
         }).then(function (data) {
             //   console.log(data);
             $(".existingNotesContainer").append("<div id='existingNoteInput' name='body' contenteditable='true'></div>");
-            $(".existingNotesContainer").append("<button data-id='" + data._id + "' class='saveNoteBtns'>Save</button>");
+            $(".existingNotesContainer").append("<button data-id='" + data._id + "' class='saveNoteBtns btn btn-primary'>Save</button>");
 
             if (data.note) {
                 $("#existingNoteInput").append(data.note.body);

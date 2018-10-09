@@ -1,11 +1,38 @@
-.nav.justify-content-end {
-display:inline-flex;
-background: pink;
+body {
+    height: 100%;
+    background-image: url("../img/purple-globe.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+.nav.justify-content-left {
+background: rgb(224,180,224, 0.9);
 width: 100%;
+position: fixed;
+z-index: 2;
+}
+
+.nav-container {
+    display: inline-flex;
+    margin-left: 20px;
 }
 .container {
     padding: 0;
+    margin-top:150px;
 }
+
+#home-link, #saved-link{
+    margin-top: 15px;
+    color: white;
+}
+
+
+.navbar-brand {
+    margin-top: 14px;
+    color: white;
+}
+
 
 .btn.btn-primary {
     background-color: #f4511e;
@@ -15,7 +42,7 @@ width: 100%;
     text-align: center;
     font-size: 16px;
     margin: 4px 2px;
-    opacity: 0.6;
+    opacity: 0.7;
     transition: 0.3s;
     display: inline-block;
     text-decoration: none;
@@ -30,7 +57,77 @@ width: 100%;
     transform: translateY(4px);
   }
 
-.jumbotron.jumbotron-fluid {
-    background-image: url("../img/purple-globe.jpg");
-    /* background-color: red; */
+.background-container{
+    height: 200px;
+}
+
+.tables {
+    font-family: 'Open Sans Condensed', sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+    font-size: 18px;
+}
+
+
+tr:nth-child(even) {
+    background-color: rgb(143,153,196, 0.8);
+}
+
+tr:nth-child(odd) {
+    background-color: rgb(255,255,255, 0.8);
+}
+
+
+a {
+    color: black;
+}
+.table-container {
+    font-weight:bold;
+    max-width: 90%;
+    margin: auto;
+    margin-bottom:20px;
+    position: relative;
+}
+
+#saveBtns, #scrapeBtn {
+    background-color:rgb(141,85,143);
+} 
+
+.noteBtns.btn.btn-primary, .saveNoteBtns.btn.btn-primary, .clearBtn.btn.btn-primary {
+    background-color: rgb(68,34,204);
+}
+
+p.lines {
+    margin-top: 10px;
+    background-color: rgb(255, 255, 255, 0.65);
+    font-size: 30px;
+    padding: 10px;
+}
+
+#line1 {
+    width: 40%;
+}
+
+#line2 {
+    width: 60%;
+}
+
+#existingNoteInput {
+    border-style: groove;
+    border-width: 1px;
+    border-color: slateblue;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
